@@ -14,6 +14,7 @@
 //1.set size of matrix
 (int, int) GetSizeByUser()
 {
+  Console.WriteLine("Введите размер массива: ");
   int row = Convert.ToInt32(Console.ReadLine());
   int columns = Convert.ToInt32(Console.ReadLine());
   return (row, columns);
@@ -36,27 +37,33 @@ int[,] GenerateMatrix(int row, int column)
   return arr;
 }
 //3.Calculate the sum
-string GetSum(int[,] matr)
+string GetMinSumOfRow(int[,] matr)
 {
-  String rez = "";
+  int tempr = 0;
+  int mintemp = 0;
+  for (int c = 0; c < matr.GetLength(1); c++)
+  {
+    mintemp += matr[0, c];
+  }
 
-  for (int r = 0; r < matr.GetLength(0); r++)
+  for (int r = 1; r < matr.GetLength(0); r++)
   {
     int sum = 0;
     for (int c = 0; c < matr.GetLength(1); c++)
     {
       sum += matr[r, c];
     }
-    int mintemp = sum;
-    if (mintemp > sum) mintemp = sum;
-    //Console.WriteLine(mintemp);
-    rez = $"{mintemp}";
-
+    if (mintemp > sum)
+    {
+      mintemp = sum;
+      tempr = r;
+    }
   }
-  return rez;
+  Console.WriteLine($"Минимальная сумма в троке: {mintemp}");
+  return $"{tempr}";
 }
 
 (int row, int column) size = GetSizeByUser();
 int[,] matrix = GenerateMatrix(size.row, size.column);
-string minsum = GetSum(matrix);
-Console.WriteLine($"{minsum} cумма");
+string minsum = GetMinSumOfRow(matrix);
+Console.WriteLine($"Номер строки сумма в которой является минимальной: {minsum} ");
