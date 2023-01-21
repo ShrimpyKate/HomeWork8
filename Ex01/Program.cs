@@ -36,7 +36,7 @@ int[,] GenerateMatrix(int row, int column)
   }
   return arr;
 }
-//3.Calculate the sum
+//3.Calculate minsum and it's rows number
 string GetMinSumOfRow(int[,] matr)
 {
   int tempr = 0;
